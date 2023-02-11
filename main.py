@@ -37,32 +37,73 @@ def main():
     bin_raw = open("bin.txt", "r").readlines()
     bin_rearranged = rearrange(bin_raw)
 
-    for line in bin_rearranged:
-        print(line)
-
     for line_nr, line in enumerate(bin_rearranged[0:8]):
         place_line(schem, line_nr, line, 0, 0, "minecraft:repeater[facing=north]")
-
     for line_nr, line in enumerate(bin_rearranged[8:15]):
         place_line(schem, line_nr, line, 1, 0, "minecraft:repeater[facing=north]")
 
+    for bit, char in enumerate(bin_raw[15][0:8][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 2, 2 * bit, 9), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 2, 2 * bit, 9), "minecraft:repeater[facing=north]")
+
+    for bit, char in enumerate(bin_raw[15][8:16][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 18, 2 * bit - 16, 0), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 18, 2 * bit - 16, 0), "minecraft:repeater[facing=west]")
+
     for line_nr, line in enumerate(bin_rearranged[16:24]):
         place_line(schem, line_nr, line, 0, 3, "minecraft:repeater[facing=south]")
-
     for line_nr, line in enumerate(bin_rearranged[24:31]):
         place_line(schem, line_nr, line, 1, 3, "minecraft:repeater[facing=south]")
 
+    for bit, char in enumerate(bin_raw[31][0:8][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 1, 2 * bit + 1, 11), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 1, 2 * bit + 1, 11), "minecraft:repeater[facing=south]")
+
+    for bit, char in enumerate(bin_raw[31][8:16][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 18, 2 * bit - 16, 2), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 18, 2 * bit - 16, 2), "minecraft:repeater[facing=west]")
+
     for line_nr, line in enumerate(bin_rearranged[32:40]):
         place_line(schem, line_nr, line, 1, 8, "minecraft:repeater[facing=north]")
-
     for line_nr, line in enumerate(bin_rearranged[40:47]):
         place_line(schem, line_nr, line, 2, 8, "minecraft:repeater[facing=north]")
 
+    for bit, char in enumerate(bin_raw[47][0:8][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 2, 2 * bit + 1, 13), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 2, 2 * bit + 1, 13), "minecraft:repeater[facing=south]")
+
+    for bit, char in enumerate(bin_raw[47][8:16][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 18, 2 * bit - 14, 6), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 18, 2 * bit - 14, 6), "minecraft:repeater[facing=south]")
+
     for line_nr, line in enumerate(bin_rearranged[48:56]):
         place_line(schem, line_nr, line, 1, 11, "minecraft:repeater[facing=south]")
-
     for line_nr, line in enumerate(bin_rearranged[56:63]):
         place_line(schem, line_nr, line, 2, 11, "minecraft:repeater[facing=south]")
+
+    for bit, char in enumerate(bin_raw[63][0:8][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 3, 2 * bit + 1, 13), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 3, 2 * bit + 1, 13), "minecraft:repeater[facing=south]")
+
+    for bit, char in enumerate(bin_raw[63][8:16][::-1].strip()):
+        if char == "0":
+            schem.setBlock((2 * bit + 19, 2 * bit - 15, 14), "minecraft:white_stained_glass")
+        else:
+            schem.setBlock((2 * bit + 19, 2 * bit - 15, 14), "minecraft:repeater[facing=south]")
 
     schem.save("C:/Users/Oem/PycharmProjects/schematic", "ms", mcschematic.Version.JE_1_16_5)
 
