@@ -1,4 +1,7 @@
 import mcschematic
+import os
+
+here = os.path.dirname(os.path.abspath(__file__))
 
 
 def rearrange(lines: list[str]):
@@ -13,7 +16,7 @@ def rearrange(lines: list[str]):
         line_right = line[8:16]
 
         for i in range(0, 8):
-            temp += line_left[i] + line_right[i]
+            temp += line_right[i] + line_left[i]
 
         output.append(temp[::-1])
 
@@ -34,7 +37,7 @@ def place_line(schem, line_nr, line, diag_offset, z_offset, repeater):
 def main():
     schem = mcschematic.MCSchematic()
 
-    bin_raw = open("bin.txt", "r").readlines()
+    bin_raw = open(os.path.join(here, "bin.txt"), "r").readlines()
     bin_rearranged = rearrange(bin_raw)
 
     for line_nr, line in enumerate(bin_rearranged[0:8]):
